@@ -1,0 +1,27 @@
+{% extends 'default.html' %}
+{% block title %}Login{% endblock %}
+{% block content %}
+<h1>Login</h1>
+<div class="container">
+    {% if message == 'error' %}
+        <p class="alert alert-danger" role="alert">Veuillez remplir tous les champs.</p>
+    {% elif message == 'failure' %}
+        <p class="alert alert-danger" role="alert">Une erreur est survenue, veuillez réessayer plus tard.</p>
+    {% elif message == 'success' and user==None%}
+        <p class="alert alert-warning" role="alert">Vous êtes connecté(e) !!!</p>
+    {% endif %}
+</div>
+    <form method="post" action="{{ url_for('login') }}">
+        <div class="mb-3">
+            <label for="username" class="form-label">username</label>
+            <input type="text" class="form-control" id="username" name="username" aria-describedby="usernameHelp" required>
+            <div id="usernameHelp" class="form-text">username</div>
+        </div>
+        <div class="mb-3">
+            <label for="password" class="form-label">password</label>
+            <input type="password" class="form-control" id="password" name="password" required>
+        </div>
+        <button type="submit" class="btn btn-primary">login</button>
+    </form>
+</div>
+{% endblock %}

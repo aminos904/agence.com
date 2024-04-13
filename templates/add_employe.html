@@ -1,0 +1,43 @@
+{% extends 'default.html' %}
+{% block title %} Ajouter un employé {% endblock %}
+{% block content %}
+<div class="container mt-5">
+    <h1>Ajouter un nouvel employé</h1>
+    <div class="container">
+        {%if message=='Error'%}
+            <p class="alert alert-danger" role="alert">Veuillez remplir tous les champs.</p>
+        {%elif message == 'failure'%}
+            <p class="alert alert-warning" role="alert">Une erreur est survenue, veuillez réessayer plus tard.</p>
+        {%elif message == 'success'%}
+            <p class="alert alert-success" role="alert">L'employé a bien été ajouté !</p>
+        {%endif%}
+    </div>
+    {% if message == 'error' %}
+    <div>
+        <p style="color: red;">Tous les champs sont obligatoires.</p>
+    </div>
+    {% elif message == 'success' %}
+    <div>
+        <p style="color: green;">L'utilisateur a bien été ajouté !</p>
+    </div>
+    {% endif %}
+    <form action="{{ url_for('add_employe') }}" method="POST">
+        <div class="mb-3">
+            <label for="nom" class="form-label">Nom :</label>
+            <input type="text" class="form-control" id="nom" name="nom" placeholder="Entrez le nom" required>
+        </div>
+        <div class="mb-3">
+            <label for="matricule" class="form-label">username :</label>
+            <input type="text" class="form-control" id="matricule" name="username" placeholder="Entrez le username" required>
+        </div>
+        <div class="mb-3">
+            <label for="fonction" class="form-label">password :</label>
+            <input type="text" class="form-control" id="fonction" name="password" placeholder="Entrez le password" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Ajouter</button>
+    </form>
+    {% if message %}
+    <p class="mt-3">{{ message }}</p>
+    {% endif %}
+</div>
+{% endblock %}
